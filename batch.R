@@ -1,5 +1,6 @@
 #file1#
 library(xlsx)
+library(tcltk)
 data=read.xlsx("T:\\Advanced Modules Implementation Plan vs Status.xlsx" , sheetIndex = 2 , header = FALSE)
 Data_Frame = data.frame(data)
 Data_Frame <- Data_Frame[-3,-1]
@@ -310,6 +311,5 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.xlsx(x = new , file = "T:\\Tableau_BankProject\\Summary of QA Out (QA Release).xlsx",sheetName = "Summary of QA Out (QA Release)",row.names=FALSE)
 
-require(tcltk)
 msgBox <- tkmessageBox(title = "Hello, Tableau Developer",
                        message = "Mehul Katara : Tableau datasource refreshed", icon = "info", type = "ok")
