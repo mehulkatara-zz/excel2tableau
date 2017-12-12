@@ -1,5 +1,5 @@
 library(xlsx)
-data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 1 , header = TRUE)
+data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 2 , header = TRUE)
 Data_Frame = data.frame(data)
 
 Data_Frame[] <- lapply(Data_Frame, as.character)
@@ -55,4 +55,4 @@ for(p1 in 1:length(Data_Frame[,1]))
 names(new)[1]<-paste("Date")
 names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
-write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQAAllotted.csv",row.names=FALSE)
+write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQARelease.csv",row.names=FALSE)
