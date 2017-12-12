@@ -3,6 +3,7 @@ data=read.xlsx("T:\\Tableau_BankProject\\Support App Usage.xlsx", sheetIndex = 1
 Data_Frame = data.frame(data)
 Data_Frame[] <- lapply(Data_Frame, as.character)
 category= colnames(Data_Frame)
+category=category[-6]
 category=category[-5]
 category=category[-1]
 new= data.frame()
@@ -59,4 +60,4 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 names(new)[4]<-paste("Total Bank")
 
-write.xlsx(x = new , file = "T:\\Tableau_BankProject\\SupportAppUsage.xlsx",sheetName = "Category wise support app usage",row.names=FALSE)
+write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
