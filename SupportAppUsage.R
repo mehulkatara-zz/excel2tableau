@@ -60,4 +60,6 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 names(new)[4]<-paste("Total Bank")
 
+new[is.na(new)] <- 0
+
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
