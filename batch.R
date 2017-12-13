@@ -269,7 +269,7 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQAAllotted.csv",row.names=FALSE)
 
-info(logger, 'start:completed:TableauQAAllotted.csv')
+info(logger, 'completed:TableauQAAllotted.csv')
 
 #file4#
 
