@@ -1,10 +1,12 @@
 library(log4r)
 logger <- create.logger()
 logfile(logger) <- file.path('base.log')
+level(logger) <- "INFO"
 
 #file1#
 
-level(logger) <- "start:TableauAdvancedModulesASP.csv"
+info(logger, 'start:TableauAdvancedModulesASP.csv')
+
 library(xlsx)
 library(tcltk)
 data=read.xlsx("T:\\Tableau_BankProject\\Advanced Modules Implementation Plan vs Status.xlsx" , sheetIndex = 1 , header = FALSE)
@@ -101,11 +103,13 @@ names(new)[2]<-paste("Product")
 names(new)[3]<-paste("Status")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauAdvancedModulesASP.csv",row.names=FALSE)
-level(logger) <- "completed:TableauAdvancedModulesASP.csv"
+
+info(logger, 'completed:TableauAdvancedModulesASP.csv')
 
 #file2#
 
-level(logger) <- "start:TableauAdvancedModulesTBA.csv"
+info(logger, 'start:TableauAdvancedModulesTBA.csv')
+
 data=read.xlsx("T:\\Tableau_BankProject\\Advanced Modules Implementation Plan vs Status.xlsx" , sheetIndex = 2 , header = FALSE)
 Data_Frame = data.frame(data)
 Data_Frame <- Data_Frame[-3,-1]
@@ -200,11 +204,13 @@ names(new)[2]<-paste("Product")
 names(new)[3]<-paste("Status")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauAdvancedModulesTBA.csv",row.names=FALSE)
-level(logger) <- "completed:TableauAdvancedModulesTBA.csv"
+
+info(logger, 'completed:TableauAdvancedModulesTBA.csv')
 
 #file3#
 
-level(logger) <- "start:TableauQAAllotted.csv.csv"
+info(logger, 'start:TableauQAAllotted.csv.csv')
+
 data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 1 , header = TRUE)
 Data_Frame = data.frame(data)
 
@@ -262,11 +268,13 @@ names(new)[1]<-paste("Date")
 names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQAAllotted.csv",row.names=FALSE)
-level(logger) <- "completed:TableauQAAllotted.csv"
+
+info(logger, 'start:completed:TableauQAAllotted.csv')
 
 #file4#
 
-level(logger) <- "start:TableauQARelease.csv"
+info(logger, 'start:TableauQARelease.csv')
+
 data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 2 , header = TRUE)
 Data_Frame = data.frame(data)
 
@@ -324,11 +332,13 @@ names(new)[1]<-paste("Date")
 names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQARelease.csv",row.names=FALSE)
-level(logger) <- "completed:TableauQARelease.csv"
+
+info(logger, 'completed:TableauQARelease.csv')
 
 #File5#
 
-level(logger) <- "start:TableauSupportAppUsage.csv"
+info(logger, 'start:TableauSupportAppUsage.csv')
+
 data=read.xlsx("T:\\Tableau_BankProject\\Support App Usage.xlsx", sheetIndex = 1 , header = TRUE)
 Data_Frame = data.frame(data)
 Data_Frame[] <- lapply(Data_Frame, as.character)
@@ -394,8 +404,9 @@ new[5]<-(cumsum(new[,3]))  #adding new column with running count
 names(new)[5]<-paste("run sum")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
-level(logger) <- "completed:TableauSupportAppUsage.csv"
 
-msgBox <- tkmessageBox(title = "Hello, Tableau Developer",
-                       message = "Mehul Katara : Tableau datasource refreshed", icon = "info", type = "ok")
+info(logger, 'completed:TableauSupportAppUsage.csv')
 
+
+system('CMD /C "ECHO Tableau datasource refreshed check more information in base.log && PAUSE"', 
+       invisible=FALSE, wait=FALSE)
