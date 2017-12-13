@@ -60,7 +60,7 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 names(new)[4]<-paste("Total Bank")
 new[is.na(new)] <- 0  #replacing NA with 0
-new[5]<-max(cumsum(new[,3]))  #adding new colume with max running count
+new[5]<-max(cumsum(new[,3]))  #adding new column with max running count
 names(new)[5]<-paste("run sum")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
