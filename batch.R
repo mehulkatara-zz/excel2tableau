@@ -209,7 +209,7 @@ info(logger, 'completed:TableauAdvancedModulesTBA.csv')
 
 #file3#
 
-info(logger, 'start:TableauQAAllotted.csv.csv')
+info(logger, 'start:TableauQAAllotted.csv')
 
 data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 1 , header = TRUE)
 Data_Frame = data.frame(data)
