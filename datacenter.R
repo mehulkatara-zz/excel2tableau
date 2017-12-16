@@ -59,3 +59,4 @@ sleep=0
 cat(paste0("\n Date saved in ",setfolder,"/all.csv"))
 }
 Sys.sleep(sleep)
+#do.call("rbind", strsplit(VESSELID, " ")) for spliting data frame example use only
