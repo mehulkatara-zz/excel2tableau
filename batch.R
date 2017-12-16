@@ -1,3 +1,4 @@
+setwd("T:/Repository/Mehul/excel2tableau")
 library(log4r)
 logger <- create.logger()
 logfile(logger) <- file.path('base.log')
@@ -406,7 +407,3 @@ names(new)[5]<-paste("run sum")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
 
 info(logger, 'completed:TableauSupportAppUsage.csv')
-
-
-system('CMD /C "ECHO Tableau datasource refreshed check more information in base.log && PAUSE"', 
-       invisible=FALSE, wait=FALSE)
