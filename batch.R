@@ -105,7 +105,7 @@ names(new)[3]<-paste("Status")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauAdvancedModulesASP.csv",row.names=FALSE)
 
-info(logger, 'completed:TableauAdvancedModulesASP.csv')
+info(logger, 'stop:TableauAdvancedModulesASP.csv')
 
 #file2#
 
@@ -206,7 +206,7 @@ names(new)[3]<-paste("Status")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauAdvancedModulesTBA.csv",row.names=FALSE)
 
-info(logger, 'completed:TableauAdvancedModulesTBA.csv')
+info(logger, 'stop:TableauAdvancedModulesTBA.csv')
 
 #file3#
 
@@ -270,7 +270,7 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQAAllotted.csv",row.names=FALSE)
 
-info(logger, 'completed:TableauQAAllotted.csv')
+info(logger, 'stop:TableauQAAllotted.csv')
 
 #file4#
 
@@ -334,7 +334,7 @@ names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQARelease.csv",row.names=FALSE)
 
-info(logger, 'completed:TableauQARelease.csv')
+info(logger, 'stop:TableauQARelease.csv')
 
 #File5#
 
@@ -406,4 +406,4 @@ names(new)[5]<-paste("run sum")
 
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauSupportAppUsage.csv",row.names=FALSE)
 
-info(logger, 'completed:TableauSupportAppUsage.csv')
+info(logger, 'stop:TableauSupportAppUsage.csv')
