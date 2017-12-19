@@ -1,4 +1,3 @@
-setwd("T:/Repository/Mehul/excel2tableau")
 library(log4r)
 logger <- create.logger()
 logfile(logger) <- file.path('base.log')
