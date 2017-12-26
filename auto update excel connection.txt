@@ -1,0 +1,42 @@
+Re: power query and Excel "Refresh All" automation 
+Options
+‎01-06-2016 11:26 AM
+
+Oh, well then you want the VB macros, let me check for those to see if I still have them. Ah yes, here's the basic approach:
+
+ 
+
+Dedicate a workstation running Excel 2013 to the reporting update process
+Save the file as “Macro enabled workbook” (.xlsm)
+Enable the Developer tab, go into VB and paste the following code (or equivalent)
+
+
+Sub Auto_Open()
+
+Application.Wait (Now + TimeValue("00:00:10")) ' Allow 10 seconds to cancel when opened so we can edit if necessary
+
+Application.DisplayAlerts = False ' Disable prompts for saving over existing files, etc.
+
+strPath = "C:\temp\Book1.xlsx" ' Set path to saved xlsx file
+
+ThisWorkbook.RefreshAll ' Refresh the data model
+
+ActiveWorkbook.SaveAs strPath, xlOpenXMLWorkbook ' Save xlsm file to xlsx file
+
+Application.Quit ' Quit application
+
+End Sub
+
+ 
+
+What this code does is that when the Excel file is opened, it refreshes all data connections and saves the workbook as a “.xlsx” file (not macro enabled).
+
+Create a scheduled task on the dedicated workstation to open the Excel file at a set interval
+Based upon the previous set interval, schedule a second task to allow enough time for the data model to refresh and the file to close. This second task copies the .xlsx file to the document repository. There are a number of methods available to achieve this including mapping a drive to the document library and performing a simple copy, etc.
+ 
+
+The above is copy paste from an approach document that I wrote and we successfully implemented, I forget the details around it but you could replace the saving as XLSX file to whatever export you want.
+
+ 
+
+Please understand, this is a REALLY hacky approach as this was never an intended use for Excel. I only ever use this when forced to by circumstance and it is never a "recommended" option. I would hold to my recommendation to sign-up for Power BI Service, Connect your Excel spreadsheets and allow it to do the refreshes, they should work with Power Query queries no problem. On the automated export side, I don't really have a solution for you.
