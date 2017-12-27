@@ -1,5 +1,7 @@
 
-Public Sub SaveAttachments()
+Public Sub SaveAttachments(Item As Outlook.MailItem)
+'add item as outlook.mailitem for scheduler menu 
+'remove argument to view in macro menu
 Dim objOL As Outlook.Application
 Dim objMsg As Outlook.MailItem 'Object
 Dim objAttachments As Outlook.Attachments
