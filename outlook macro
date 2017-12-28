@@ -1,7 +1,4 @@
-
 Public Sub SaveAttachments(Item As Outlook.MailItem)
-'add item as outlook.mailitem for scheduler menu 
-'remove argument to view in macro menu
 Dim objOL As Outlook.Application
 Dim objMsg As Outlook.MailItem 'Object
 Dim objAttachments As Outlook.Attachments
@@ -11,6 +8,9 @@ Dim lngCount As Long
 Dim strFile As String
 Dim strFolderpath As String
 Dim strDeletedFiles As String
+Dim datt As String
+
+
 
 ' Get the path to your My Documents folder
 strFolderpath = CreateObject("WScript.Shell").SpecialFolders(16)
@@ -23,9 +23,12 @@ Set objOL = CreateObject("Outlook.Application")
 Set objSelection = objOL.ActiveExplorer.Selection
 
 ' Set the Attachment folder.
-strFolderpath = "C:\Users\mehul.katara\Desktop\folder\"
 
+datename = Replace(Date, "/", "-")
 
+makefolder = "D:\India Dev\tempo\" + datename
+MkDir makefolder
+strFolderpath = makefolder + "\"
 
 
 
@@ -39,18 +42,21 @@ For Each objMsg In objSelection
     Set objAttachments = objMsg.Attachments
     lngCount = objAttachments.Count
     strDeletedFiles = ""
-
+    
     If lngCount > 0 Then
 
         ' We need to use a count down loop for removing items
         ' from a collection. Otherwise, the loop counter gets
         ' confused and only every other item is removed.
 
+
         For i = lngCount To 1 Step -1
 
             ' Save attachment before deleting from item.
             ' Get the file name.
-            strFile = objAttachments.Item(i).FileName & Date
+                        
+             
+            strFile = objAttachments.Item(i).FileName
 
             ' Combine with the path to the Temp folder.
             strFile = strFolderpath & strFile
