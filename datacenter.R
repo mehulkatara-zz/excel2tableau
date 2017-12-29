@@ -1,4 +1,4 @@
-setfolder="Z://Software Change Management Documents//Daily Software Dev Dept Reports//powerbidashboard//data"
+setfolder="T:\\Tableau_BankProject\\email"
 dir=list.dirs(setfolder ,recursive = FALSE) #find all folder in directory
 dir <- dir[!grepl("[_]", basename(dir))]
 cat(paste0("\n Setting directory to "),setfolder)
@@ -36,7 +36,7 @@ for(j in 1: dirnum)#loop for folder
       d<-gsub("\\s+", ";", gsub("^\\s+|\\s+$", "",d)) # remove space
       d<- gsub('\\s+',',',d) # replacing with ','
       
-      write.table(d,file="all.csv",append = TRUE,col.names=FALSE) # save and apped in csv
+      write.table(d,file="T:\\Tableau_BankProject\\all.csv",append = TRUE,col.names=FALSE) # save and apped in csv
       
       
 	    cat(paste0("\n ",allfiles," ","Files remaing to append"))
