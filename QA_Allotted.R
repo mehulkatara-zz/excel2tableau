@@ -8,7 +8,7 @@ category=category[-1]
 
 new= data.frame()
 
-
+# Categorzation of data by converting columns into rows.
 p1=1
 p2=1
 p3=1
