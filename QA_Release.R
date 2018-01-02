@@ -1,14 +1,16 @@
 library(xlsx)
 data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 2 , header = TRUE)
+#Converting into dataframe
 Data_Frame = data.frame(data)
 
 Data_Frame[] <- lapply(Data_Frame, as.character)
 category= colnames(Data_Frame) 
 category=category[-1]
-
+# New dataframe
 new= data.frame()
 
-
+# Categorization of data by converting columns into rows.
+#Column 1
 p1=1
 p2=1
 p3=1
@@ -21,7 +23,7 @@ for(p1 in 1:length(Data_Frame[,1]))
   }
   p1=p1+1
 }
-
+#Column 2
 p1=1
 p2=1
 p3=1
@@ -34,7 +36,7 @@ for(p1 in 1:length(Data_Frame[,1]))
   }
   p1=p1+1
 }
-
+#Column 3
 p1=1
 p2=1
 p3=1
@@ -55,4 +57,5 @@ for(p1 in 1:length(Data_Frame[,1]))
 names(new)[1]<-paste("Date")
 names(new)[2]<-paste("Category")
 names(new)[3]<-paste("Count")
+# Creating CSV
 write.csv(x = new , file = "T:\\Tableau_BankProject\\TableauQARelease.csv",row.names=FALSE)
