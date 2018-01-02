@@ -30,3 +30,5 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
            ")
 
 dbWriteTable(mydb, name='server_info', value=mydf,append=TRUE)
+
+dbDisconnect(mydb)
