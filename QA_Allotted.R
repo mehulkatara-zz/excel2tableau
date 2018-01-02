@@ -1,14 +1,16 @@
 library(xlsx)
 data=read.xlsx("T:\\Tableau_BankProject\\QA Daily Report.xlsx", sheetIndex = 1 , header = TRUE)
+#Converting data into dataframe
 Data_Frame = data.frame(data)
 
 Data_Frame[] <- lapply(Data_Frame, as.character)
 category= colnames(Data_Frame) 
-category=category[-1]
+category=category[-1] # Deleting 1 column name
 
 new= data.frame()
 
-# Categorzation of data by converting columns into rows.
+# categorization of data by converting columns into rows.
+#Column 1
 p1=1
 p2=1
 p3=1
@@ -21,7 +23,7 @@ for(p1 in 1:length(Data_Frame[,1]))
   }
   p1=p1+1
 }
-
+#Column 2
 p1=1
 p2=1
 p3=1
@@ -34,7 +36,7 @@ for(p1 in 1:length(Data_Frame[,1]))
   }
   p1=p1+1
 }
-
+#Column 3
 p1=1
 p2=1
 p3=1
