@@ -26,6 +26,9 @@ seconds <- as.numeric(gsub('^.* ([0-9]+)s.*$','\\1',mydf[,5]))
 #convert to seconds
 mydf[,5] <- seconds + 60*minutes + 60*60*hours
 
+#adding seconds in last update time
+mydf[,5] <- mydf[,5]+as.POSIXct(mydf[,6])
+
 library(RMySQL)
 
 mydb = dbConnect(MySQL(), user='tmspl', password='tmsystem@321', dbname='ServerDashboard', host='192.168.52.208')
