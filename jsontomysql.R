@@ -18,18 +18,13 @@ mydf = mydf[["server_data"]]
 #Replace N/A with blank
 mydf[] <- lapply(mydf[], gsub, pattern = 'N/A', replacement='')
 
-#Replace space with :
-mydf[5]=lapply(mydf[5],gsub, pattern=' ', replacement = ':')
+#extract hours,minutes and seconds
+hours <- as.numeric(gsub('^(?:.* )?([0-9]+)h.*$','\\1',mydf[,5]))
+minutes <- as.numeric(gsub('^.* ([0-9]+)m.*$','\\1',mydf[,5]))
+seconds <- as.numeric(gsub('^.* ([0-9]+)s.*$','\\1',mydf[,5]))
 
-#Replace alpha with blank
-mydf[5]=lapply(mydf[5],gsub, pattern='[[:alpha:]]', replacement = '')
-
-#Get current date
-date=format(Sys.time(), "%Y-%m-%d")
-
-#Current date store in dataframe
-mydf[5]=lapply(mydf[5],function(x) paste(date, x,sep=" "))
-
+#convert to seconds
+mydf[,5] <- seconds + 60*minutes + 60*60*hours
 
 library(RMySQL)
 
@@ -45,7 +40,7 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
            `lable` varchar(225) DEFAULT NULL,
            `status` varchar(225) DEFAULT NULL,
            `remaining_bytes` int(225) DEFAULT NULL,
-           `remaining_time` time DEFAULT NULL,
+           `remaining_time` text DEFAULT NULL,
            `last_update_date_time` datetime DEFAULT NULL,
            `replication_status` varchar(225) DEFAULT NULL,
            `prev_last_updated_time` datetime DEFAULT NULL
