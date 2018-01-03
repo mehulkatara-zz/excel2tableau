@@ -43,7 +43,7 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
            `lable` varchar(225) DEFAULT NULL,
            `status` varchar(225) DEFAULT NULL,
            `remaining_bytes` int(225) DEFAULT NULL,
-           `remaining_time` text DEFAULT NULL,
+           `remaining_time` datetime DEFAULT NULL,
            `last_update_date_time` datetime DEFAULT NULL,
            `replication_status` varchar(225) DEFAULT NULL,
            `prev_last_updated_time` datetime DEFAULT NULL
