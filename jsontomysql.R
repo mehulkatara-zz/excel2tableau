@@ -27,7 +27,9 @@ seconds <- as.numeric(gsub('^.* ([0-9]+)s.*$','\\1',mydf[,5]))
 mydf[,5] <- seconds + 60*minutes + 60*60*hours
 
 #adding seconds in last update time
-mydf[,5] <- mydf[,5]+as.POSIXct(mydf[,6])
+mydf[,9] <- mydf[,5]+as.POSIXct(mydf[,6])
+
+names(mydf)[9]<-paste("estimated_time")
 
 library(RMySQL)
 
@@ -46,7 +48,8 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
            `remaining_time` datetime DEFAULT NULL,
            `last_update_date_time` datetime DEFAULT NULL,
            `replication_status` varchar(225) DEFAULT NULL,
-           `prev_last_updated_time` datetime DEFAULT NULL
+           `prev_last_updated_time` datetime DEFAULT NULL,
+           `estimated_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
            ")
 
