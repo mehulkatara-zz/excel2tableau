@@ -1,3 +1,12 @@
+log=data.frame()
+log[1,1]=data.frame(startdatetime=format(Sys.time(), "%D %X"))
+log[1,2]=data.frame(scriptname="jsontomysql.r")
+
+library(RMySQL)
+
+mydb = dbConnect(MySQL(), user='tmspl', password='tmsystem@321', dbname='ServerDashboard', host='192.168.52.208')
+
+
 #setting working directory 
 setwd("T:\\Tableau_BankProject")
 
@@ -81,6 +90,8 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
 #saving dataframe to mysql
 dbWriteTable(mydb, name='server_info', value=mydf,append=TRUE)
 
+log[1,3]=data.frame(stopdatetime=format(Sys.time(), "%D %X"))
+
+dbWriteTable(mydb, name='R log', value=log,append=TRUE,row.names = FALSE)
 #closeing database connection
 dbDisconnect(mydb)
-
