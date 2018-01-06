@@ -29,42 +29,25 @@ mydf[,5] <- seconds + 60*minutes + 60*60*hours
 #adding seconds in last update time
 mydf[,9] <- mydf[,5]+as.POSIXct(mydf[,6])
 
-mydf$remaining_bytes=as.numeric(mydf$remaining_bytes)
+# Converting remaining bytes in numeric format
+mydf$remaining_bytes=as.numeric(mydf$remaining_bytes) 
 
-#Converting the bytes into Kb,Mb,GBTB
-for (i in 1:nrow(mydf)) 
-{
-  # Remaining bytes in Kb
-  if(mydf$remaining_bytes>0 && mydf$remaining_bytes<=1024 )
-  {
-    mydf$convert=mydf$remaining_bytes
-  }
-  # Remaining bytes in Mb
-  if(mydf$remaining_bytes>1024 && mydf$remaining_bytes<=(1024*1024))
-  {
-    mydf$convert=(mydf$remaining_bytes)/(1024)
-  }
-  # Remaining bytes in GB
-  if(mydf$remaining_bytes>1024*1024 && mydf$remaining_bytes<=(1024*1024*1024))
-  {
-    mydf$convert=(mydf$remaining_bytes)/(1024*1024)
-  }
-  
-  # Remaining bytes in  TB
-  if(mydf$remaining_bytes>1024*1024*1024&& mydf$remaining_bytes<=(1024*1024*1024*1024))
-  {
-    mydf$convert=(mydf$remaining_bytes)/(1024*1024*1024)
-  }
-}
+#Converting the bytes into KB,MB,GB,TB
+mydf$convert<-ifelse(mydf$remaining_bytes>=0&mydf$remaining_bytes<1024,rr2<-mydf$remaining_bytes,
+                 ifelse(mydf$remaining_bytes>=1024&mydf$remaining_bytes<(1024*1024),rr2<-mydf$remaining_bytes/1024,
+                        ifelse(mydf$remaining_bytes>=(1024*1024)&mydf$remaining_bytes<(1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024), 
+                               ifelse(mydf$remaining_bytes>=(1024*1024*1024)&mydf$remaining_bytes<(1024*1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024*1024), rr2<-mydf$remaining_bytes/(1024*1024*1024*1024)))))
+
+
 
 mydf$convert=formatC(mydf$convert, format="f", digits=2) #Converting into float upto 2 decimal points.
-mydf$convert
+
 #for Naming
 
-mydf$unit<-ifelse(mydf$remaining_bytes>=0&mydf$remaining_bytes<=1024,rr2<-"Kb",
-                     ifelse(mydf$remaining_bytes>1024&mydf$remaining_bytes<=(1024*1024),rr2<-"Mb",
-                            ifelse(mydf$remaining_bytes>(1024*1024)&mydf$remaining_bytes<=(1024*1024*1024),rr2<-"GB", rr2<-"TB")))
-
+mydf$unit<-ifelse(mydf$remaining_bytes>=0&mydf$remaining_bytes<1024,rr2<-"Bytes",
+                  ifelse(mydf$remaining_bytes>=1024&mydf$remaining_bytes<(1024*1024),rr2<-"KB",
+                         ifelse(mydf$remaining_bytes>=(1024*1024)&mydf$remaining_bytes<(1024*1024*1024),rr2<-"MB", 
+                                ifelse(mydf$remaining_bytes>=(1024*1024*1024)&mydf$remaining_bytes<(1024*1024*1024*1024),rr2<-"GB", rr2<-"TB"))))
 
 mydf$new_remaining_bytes <- paste(mydf$convert,mydf$unit)
 names(mydf)[9]<-paste("estimated_time")
@@ -84,7 +67,7 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
            `lable` varchar(225) DEFAULT NULL,
            `status` varchar(225) DEFAULT NULL,
            `remaining_bytes` int(225) DEFAULT NULL,
-           `remaining_time` datetime DEFAULT NULL,
+           `remaining_time` int(225) DEFAULT NULL,
            `last_update_date_time` datetime DEFAULT NULL,
            `replication_status` varchar(225) DEFAULT NULL,
            `prev_last_updated_time` datetime DEFAULT NULL,
@@ -100,3 +83,4 @@ dbWriteTable(mydb, name='server_info', value=mydf,append=TRUE)
 
 #closeing database connection
 dbDisconnect(mydb)
+
