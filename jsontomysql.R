@@ -1,5 +1,5 @@
 log=data.frame()
-log[1,1]=data.frame(startdatetime=format(Sys.time(), "%D %X"))
+log[1,1]=data.frame(startdatetime=format(Sys.time(), "%y-%m-%d %X"))
 log[1,2]=data.frame(scriptname="jsontomysql.r")
 
 library(RMySQL)
@@ -43,9 +43,9 @@ mydf$remaining_bytes=as.numeric(mydf$remaining_bytes)
 
 #Converting the bytes into KB,MB,GB,TB
 mydf$convert<-ifelse(mydf$remaining_bytes>=0&mydf$remaining_bytes<1024,rr2<-mydf$remaining_bytes,
-                 ifelse(mydf$remaining_bytes>=1024&mydf$remaining_bytes<(1024*1024),rr2<-mydf$remaining_bytes/1024,
-                        ifelse(mydf$remaining_bytes>=(1024*1024)&mydf$remaining_bytes<(1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024), 
-                               ifelse(mydf$remaining_bytes>=(1024*1024*1024)&mydf$remaining_bytes<(1024*1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024*1024), rr2<-mydf$remaining_bytes/(1024*1024*1024*1024)))))
+                     ifelse(mydf$remaining_bytes>=1024&mydf$remaining_bytes<(1024*1024),rr2<-mydf$remaining_bytes/1024,
+                            ifelse(mydf$remaining_bytes>=(1024*1024)&mydf$remaining_bytes<(1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024), 
+                                   ifelse(mydf$remaining_bytes>=(1024*1024*1024)&mydf$remaining_bytes<(1024*1024*1024*1024),rr2<-mydf$remaining_bytes/(1024*1024*1024), rr2<-mydf$remaining_bytes/(1024*1024*1024*1024)))))
 
 
 
@@ -71,7 +71,7 @@ dbGetQuery(mydb, "DROP TABLE `server_info`;")
 
 #Create database table
 dbGetQuery(mydb, "CREATE TABLE `server_info` (
-  `row_names` int(225) DEFAULT NULL,
+           `row_names` int(225) DEFAULT NULL,
            `id` int(225) DEFAULT NULL,
            `lable` varchar(225) DEFAULT NULL,
            `status` varchar(225) DEFAULT NULL,
@@ -90,7 +90,7 @@ dbGetQuery(mydb, "CREATE TABLE `server_info` (
 #saving dataframe to mysql
 dbWriteTable(mydb, name='server_info', value=mydf,append=TRUE)
 
-log[1,3]=data.frame(stopdatetime=format(Sys.time(), "%D %X"))
+log[1,3]=data.frame(stopdatetime=format(Sys.time(), "%y-%m-%d %X"))
 
 dbWriteTable(mydb, name='R log', value=log,append=TRUE,row.names = FALSE)
 #closeing database connection
