@@ -65,7 +65,7 @@ Set objAttachments = objMsg.Attachments
             strFile = objAttachments.Item(i).FileName
 
             ' Combine with the path to the Temp folder.
-            strFile = strFolderpath + tim + " " + strFile
+            strFile = strFolderpath + strFile
 
             ' Save the attachment as a file.
             objAttachments.Item(i).SaveAsFile strFile
