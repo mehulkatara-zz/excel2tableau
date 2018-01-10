@@ -1,13 +1,20 @@
 # ETL for Tableau
-> datacenter.R
+## datacenter.R
 
-Transform semi-structure text files to structure database  
+Transform semi-structure text files to structure database
 
-> outlook macro.vba
+> Limitation
+
+Data center name must not greater then 3 character
+
+Read folder must not contain "_"
+
+Semi-structure text files changes affect to database
+
+## outlook macro.vba
 
 Auto download email attachment from specific subject and save it into folder
 
-> jsontomysql.R
+## jsontomysql.R
 
 Download json file and convert it to database
-
