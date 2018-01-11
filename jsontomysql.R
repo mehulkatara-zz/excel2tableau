@@ -4,14 +4,14 @@ log[1,2]=data.frame(scriptname="jsontomysql.r")
 
 library(RMySQL)
 
-mydb = dbConnect(MySQL(), user='tmspl', password='tmsystem@321', dbname='ServerDashboard', host='192.168.52.208')
+mydb = dbConnect(MySQL(), user='user', password='password', dbname='dbname', host='0.0.0.0') # Append Details 
 
 
 #setting working directory 
 setwd("T:\\Tableau_BankProject")
 
 #link of the json file
-url="http://srvmanager.tmsys.in:81/ServerManagerTmspl/dashboardtm/getDataApi"
+url="http://example.com"  # Append Details
 
 #download json file
 download.file(url,"datacenter.json",quiet = TRUE, mode = "w")
