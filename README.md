@@ -17,4 +17,4 @@ Auto download email attachment from specific subject and save it into folder
 
 ## jsontomysql.R
 
-Download json file and convert it to database
+Get data from an API and stored in the database.
