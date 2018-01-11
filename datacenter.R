@@ -3,7 +3,7 @@ log[1,1]=data.frame(startdatetime=format(Sys.time(), "%y-%m-%d %X"))
 log[1,2]=data.frame(scriptname="datacenter.r")
 
 library(RMySQL)
-mydb = dbConnect(MySQL(), user='tmspl', password='tmsystem@321', dbname='ServerDashboard', host='192.168.52.208')
+mydb = dbConnect(MySQL(), user='user', password='password', dbname='dbname', host='0.0.0.0')
 library(reshape2)
 setfolder="T:\\Tableau_BankProject\\email"
 dir=list.dirs(setfolder ,recursive = FALSE) #find all folder in directory
