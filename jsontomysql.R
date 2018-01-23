@@ -62,10 +62,6 @@ mydf$new_remaining_bytes <- paste(mydf$convert,mydf$unit)
 names(mydf)[9]<-paste("estimated_time")
 names(mydf)[10]<-paste("converted_data")
 
-library(RMySQL)
-
-mydb = dbConnect(MySQL(), user='tmspl', password='tmsystem@321', dbname='ServerDashboard', host='192.168.52.208')
-
 #delete existed table
 dbGetQuery(mydb, "DROP TABLE `server_info`;")
 
